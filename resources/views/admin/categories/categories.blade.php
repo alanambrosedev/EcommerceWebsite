@@ -63,7 +63,17 @@
                       <td>{{ $category['url'] }}</td>
                       <td>{{ date("F j, Y, g:i a", strtotime($category['created_at'])) }}</td>
                       <td>
-                       
+                        @if($category['status']==1)
+                            <a class="updateCategoryStatus" id="category-{{ $category['id'] }}" category_id="{{ $category['id'] }}" style='color:#3f6ed3' href="javascript:void
+                            (0)"><i class="fas fa-solid fa-toggle-on" status="Active"></i></a>
+                          @else
+                          <a class="updateCategoryStatus" id="category-{{ $category['id'] }}" category_id="{{ $category['id'] }}" style="color:gray" href="javascript:void
+                            (0)"><i class="fas fa-solid fa-toggle-off" status="Inactive"></i></a>
+                          @endif
+                        &nbsp;&nbsp;
+                        <a style="color:#3f6ed3;" class="confirmDelete" title="Delete Category" href="javascript:void
+                        (0)" record="category" recordid={{ $category['id'] }} <?php /*href="{{ url('admin/delete-cms-category/'.$category['id']) }}"*/ ?>>
+                          <i class="fas fa-trash"></i>
                       </td>
                     </tr>
                     @endforeach

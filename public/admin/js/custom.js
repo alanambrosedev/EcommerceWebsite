@@ -19,22 +19,22 @@ $(document).ready(function(){
             }
         })
     });
-    //Update CMS page status
-    $(document).on("click",".updateCmsPageStatus",function(){
+    //Update CMS category status
+    $(document).on("click",".updateCmscategoryStatus",function(){
         var status = $(this).children("i").attr("status");
-        var page_id = $(this).attr("page_id");
+        var category_id = $(this).attr("category_id");
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             type: 'post',
-            url: '/admin/update-cms-page-status',
-            data: {status: status, page_id: page_id},
+            url: '/admin/update-cms-category-status',
+            data: {status: status, category_id: category_id},
             success: function(res) {
                 if(res['status'] == 0){
-                    $("#page-"+page_id).html("<i class='fas fa-toggle-off' style='color:gray' status='Inactive'></i>");
+                    $("#category-"+category_id).html("<i class='fas fa-toggle-off' style='color:gray' status='Inactive'></i>");
                 } else if(res['status'] == 1) {
-                    $("#page-"+page_id).html("<i class='fas fa-toggle-on' style='color:#3f6ed3' status='Active'></i>");
+                    $("#category-"+category_id).html("<i class='fas fa-toggle-on' style='color:#3f6ed3' status='Active'></i>");
                 }
             },
             error: function() {
@@ -42,6 +42,30 @@ $(document).ready(function(){
             }
         });
     }); 
+
+       //Update Category status
+       $(document).on("click",".updateCategoryStatus",function(){
+        var status = $(this).children("i").attr("status");
+        var category_id = $(this).attr("category_id");
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type: 'post',
+            url: '/admin/update-category-status',
+            data: {status: status, category_id: category_id},
+            success: function(res) {
+                if(res['status'] == 0){
+                    $("#category-"+category_id).html("<i class='fas fa-toggle-off' style='color:gray' status='Inactive'></i>");
+                } else if(res['status'] == 1) {
+                    $("#category-"+category_id).html("<i class='fas fa-toggle-on' style='color:#3f6ed3' status='Active'></i>");
+                }
+            },
+            error: function() {
+                alert("Error");
+            }
+        });
+    });
     
     //Update Sub admin status
     $(document).on("click", ".updateSubadminStatus", function() {
@@ -69,7 +93,7 @@ $(document).ready(function(){
     
     
     
-    //Confirm the deletion of CMS Page
+    //Confirm the deletion of CMS category
    /* $(document).on("click",".confirmDelete",function(){
         var name = $(this).attr('name');
         if(confirm('Are you sure to delete this '+name+'?')){

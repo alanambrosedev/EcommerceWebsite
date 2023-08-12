@@ -53,6 +53,17 @@ class CategoryController extends Controller
         if ($request->isMethod('post')) {
             $data = $request->all();
 
+            $rules = [
+                'category_name' => 'required',
+                'url' => 'required|unique:categories',
+            ];
+            $customMessages = [
+                'category_name.required' => 'Category Name is required',
+                'url.required' => 'Category Url is required',
+                'url.unique' => 'Unique Category Url is required',
+            ];
+            $this->validate($request, $rules, $customMessages);
+
             //Upload Category Image
             if ($request->hasFile('category_image')) {
                 $imageTmp = $request->file('category_image');

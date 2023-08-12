@@ -54,35 +54,35 @@
                 <div class="card-body">
                   <div class="form-group">
                     <label for="category_name">Category Name*</label>
-                    <input type="text" class="form-control" id="category_name" name="category_name" placeholder="Enter Category Name">
+                    <input type="text" class="form-control" id="category_name" name="category_name" placeholder="Enter Category Name" value="{{ old('category_name') }}">
                   </div>
                   <div class="form-group">
-                    <label for="category_image">Category Image*</label>
+                    <label for="category_image">Category Image</label>
                     <input type="file" class="form-control" id="category_image" name="category_image">
                   </div>
                   <div class="form-group">
-                    <label for="category_discount">Category Discount*</label>
-                    <input type="text" class="form-control" id="category_discount" name="category_discount" placeholder="Enter Category Discount">
+                    <label for="category_discount">Category Discount</label>
+                    <input type="text" class="form-control" id="category_discount" name="category_discount" placeholder="Enter Category Discount" value="{{ old('category_discount') }}">
                   </div>
                   <div class="form-group">
                     <label for="url">Category URL*</label>
-                    <input type="text" class="form-control" id="url" name="url" placeholder="Enter Category Url">
+                    <input type="text" class="form-control" id="url" name="url" placeholder="Enter Category Url" value="{{ old('url') }}">
                   </div>
                   <div class="form-group">
-                    <label for="description">Category Description*</label>
-                    <textarea class="form-control" rows="3" id="description" name="description" placeholder="Enter Category Description"></textarea>
+                    <label for="description">Category Description</label>
+                    <textarea class="form-control" rows="3" id="description" name="description" placeholder="Enter Category Description" value="{{ old('description') }}"></textarea>
                   </div>
                   <div class="form-group">
                     <label for="meta_title">Meta Title</label>
-                    <input type="text" class="form-control" id="meta_title" name="meta_title" placeholder="Enter Meta Title">
+                    <input type="text" class="form-control" id="meta_title" name="meta_title" placeholder="Enter Meta Title" value="{{ old('meta_title') }}">
                   </div>
                   <div class="form-group">
                     <label for="meta_description">Meta Description</label>
-                    <input type="text" class="form-control" id="meta_description" name="meta_description" placeholder="Enter Meta Description">
+                    <input type="text" class="form-control" id="meta_description" name="meta_description" placeholder="Enter Meta Description" value="{{ old('meta_description') }}" >
                   </div>
                   <div class="form-group">
                     <label for="meta_keywords">Meta Keywords</label>
-                    <input type="text" class="form-control" id="meta_keywords" name="meta_keywords" placeholder="Enter Meta Keywords">
+                    <input type="text" class="form-control" id="meta_keywords" name="meta_keywords" placeholder="Enter Meta Keywords" value="{{ old('meta_keywords') }}">
                   </div>
                 </div>
                 <!-- /.card-body -->

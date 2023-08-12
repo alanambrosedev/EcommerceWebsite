@@ -87,7 +87,7 @@ class CmsController extends Controller
             ];
             $customMessages = [
                 'title.required' => 'Page title is required',
-                'url.required' => '{Page url is required',
+                'url.required' => 'Page url is required',
                 'description.required' => 'Page description is required',
             ];
             $this->validate($request, $rules, $customMessages);

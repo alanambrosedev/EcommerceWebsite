@@ -50,7 +50,7 @@
                 </div>
               @endif
                <!-- form start -->
-              <form name="categoryForm" id="categoryForm" @if(empty($category['id'])) action="{{ url('admin/add-edit-cms-page') }}" @else action="{{ url('admin/add-edit-cms-page/'.$category['id']) }}" @endif method="post">@csrf
+              <form name="categoryForm" id="categoryForm" @if(empty($category['id'])) action="{{ url('admin/add-edit-category') }}" @else action="{{ url('admin/add-edit-category/'.$category['id']) }}" @endif method="post" enctype="multipart/form-data">@csrf
                 <div class="card-body">
                   <div class="form-group">
                     <label for="category_name">Category Name*</label>

@@ -13,4 +13,18 @@ class Category extends Model
     {
         return $this->hasOne('App\Models\Category', 'id', 'parent_id')->select('id', 'category_name', 'url')->where('status', 1);
     }
+
+    public function subcategories()
+    {
+        return $this->hasMany('App\Models\Category', 'parent_id')->where('status', 1);
+    }
+
+    public static function getCategories()
+    {
+        $getcategories = Category::with(['subcategories' => function ($query) {
+            $query->with('subcategories');
+        }])->where('parent_id', 0)->where('status', 1)->get()->toArray();
+
+        return $getcategories;
+    }
 }

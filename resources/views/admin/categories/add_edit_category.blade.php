@@ -57,6 +57,26 @@
                     <input type="text" class="form-control" id="category_name" name="category_name" placeholder="Enter Category Name" value="{{ old('category_name') }}">
                   </div>
                   <div class="form-group">
+                    <label for="category_name">Category Level*</label>
+                    <select name="parent_id" class="form-control">
+                      <option value="">Select</option>
+                      <option value="">Main Category</option>
+                      @foreach ($getCategories as $cat)
+                      <option value="{{ $cat['id'] }}">{{ $cat['category_name'] }}</option>
+                      @if(!empty($cat['subcategories']))
+                          @foreach ($cat['subcategories'] as $subcat)
+                              <option value="{{ $subcat['id'] }}">&nbsp;&nbsp;&raquo;&raquo;{{ $subcat['category_name'] }}</option>
+                              @if(!empty($subcat['subcategories']))
+                                  @foreach ($subcat['subcategories'] as $subsubcat)
+                                      <option value="{{ $subsubcat['id'] }}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&raquo;&raquo;{{ $subsubcat['category_name'] }}</option>
+                                  @endforeach
+                              @endif
+                          @endforeach
+                      @endif
+                    @endforeach                      
+                    </select>
+                  </div>
+                  <div class="form-group">
                     <label for="category_image">Category Image</label>
                     <input type="file" class="form-control" id="category_image" name="category_image">
                   </div>

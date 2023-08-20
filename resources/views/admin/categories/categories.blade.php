@@ -72,6 +72,9 @@
                             (0)"><i class="fas fa-solid fa-toggle-off" status="Inactive"></i></a>
                           @endif
                         &nbsp;&nbsp;
+                        <a style="color:#3f6ed3;" href="{{ url('admin/add-edit-category/'.$category['id']) }}">
+                          <i class="fas fa-edit"></i>
+                        &nbsp;&nbsp;
                         <a style="color:#3f6ed3;" class="confirmDelete" title="Delete Category" href="javascript:void
                         (0)" record="category" recordid={{ $category['id'] }} <?php /*href="{{ url('admin/delete-cms-category/'.$category['id']) }}"*/ ?>>
                           <i class="fas fa-trash"></i>

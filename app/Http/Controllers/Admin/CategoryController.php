@@ -7,6 +7,8 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Image;
 use Session;
+use App\Models\AdminsRole;
+use Auth;
 
 class CategoryController extends Controller
 {
@@ -15,7 +17,23 @@ class CategoryController extends Controller
         Session::put('page', 'categories');
         $categories = Category::with('parentcategory')->get();
 
-        return view('admin.categories.categories')->with(compact('categories'));
+        //Set Subadmins Permission for Categories
+        $categoriesModuleCount = AdminsRole::where(['subadmin_id' => Auth::guard('admin')->user()->id, 'module' => 'categories'])->count();
+        $categoriesModule = [];
+        if (Auth::guard('admin')->user()->type == 'admin') {
+            $categoriesModule['view_access'] = 1;
+            $categoriesModule['edit_access'] = 1;
+            $categoriesModule['full_access'] = 1;
+        } elseif ($categoriesModuleCount == 0) {
+            $message = 'This feature is restricted for you!';
+
+            return redirect('admin/dashboard')->with('error_message', $message);
+        } else {
+            $categoriesModule = AdminsRole::where(['subadmin_id' => Auth::guard('admin')->user()->id, 'module' => 'categories'])->first()->toArray();
+
+        }
+
+        return view('admin.categories.categories')->with(compact('categories','categoriesModule'));
     }
 
     public function updateCategoryStatus(Request $request)

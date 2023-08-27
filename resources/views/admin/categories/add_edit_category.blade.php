@@ -79,7 +79,14 @@
                   </div>
                   <div class="form-group">
                     <label for="category_image">Category Image</label>
-                    <input type="file" class="form-control" id="category_image" name="category_image">
+                    <input type="file" class="form-control" id="categoryx_image" name="category_image">
+                    @if(!empty($category['category_image']))
+                        <a target="_blank" href="{{ url('front/images/categories/'.$category['category_image']) }}"><img style="width: 50px; margin: 10px;" src="{{ asset('front/images/categories/'.$category['category_image']) }}"></a>
+                        <a style="color:#3f6ed3;" class="confirmDelete" title="Delete Category Image" href="javascript:void(0)" record="category-image" recordid="{{ $category['id'] }}">
+                            <i style="color: #fff" class="fas fa-trash"></i>
+                        </a>
+                    @endif
+
                   </div>
                   <div class="form-group">
                     <label for="category_discount">Category Discount</label>

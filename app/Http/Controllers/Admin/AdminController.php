@@ -236,13 +236,12 @@ class AdminController extends Controller
 
     public function updateRole($id, Request $request)
     {
-
         if ($request->isMethod('post')) {
-            $data = $request->all();
-
-            //Delete all earlier roles  for Subadmmins
+            $data = $request->except(['_token', 'subadmin_id']); // Exclude _token and subadmin_id fields
+    
+            // Delete all earlier roles for Subadmins
             AdminsRole::where('subadmin_id', $id)->delete();
-
+    
             foreach ($data as $key => $value) {
                 if (isset($value['view'])) {
                     $view = $value['view'];
@@ -259,26 +258,27 @@ class AdminController extends Controller
                 } else {
                     $full = 0;
                 }
+    
+                // Create and save the role for each module
+                $role = new AdminsRole;
+                $role->subadmin_id = $id;
+                $role->module = $key;
+                $role->view_access = $view;
+                $role->edit_access = $edit;
+                $role->full_access = $full;
+                $role->save();
             }
-
-            $role = new AdminsRole;
-            $role->subadmin_id = $id;
-            $role->module = $key;
-            $role->view_access = $view;
-            $role->edit_access = $edit;
-            $role->full_access = $full;
-            $role->save();
-
+    
             $message = 'Subadmin Role updated successfully!';
-
             return redirect()->back()->with('success_message', $message);
-
         }
+    
         $subadminRoles = AdminsRole::where('subadmin_id', $id)->get()->toArray();
         $subadminDetails = Admin::where('id', $id)->first()->toArray();
-        $title = 'Update '.$subadminDetails['name'].' Subadmin Roles/Permissions';
-
+        $title = 'Update ' . $subadminDetails['name'] . ' Subadmin Roles/Permissions';
+    
         return view('admin.subadmins.update_roles')->with(compact('title', 'id', 'subadminRoles'));
-
     }
+    
+
 }

@@ -66,6 +66,30 @@ $(document).ready(function(){
             }
         });
     });
+
+     //Update Category status
+     $(document).on("click",".updateProductStatus",function(){
+        var status = $(this).children("i").attr("status");
+        var product_id = $(this).attr("product_id");
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type: 'post',
+            url: '/admin/update-product-status',
+            data: {status: status, product_id: product_id},
+            success: function(res) {
+                if(res['status'] == 0){
+                    $("#product-"+product_id).html("<i class='fas fa-toggle-off' style='color:gray' status='Inactive'></i>");
+                } else if(res['status'] == 1) {
+                    $("#product-"+product_id).html("<i class='fas fa-toggle-on' style='color:#3f6ed3' status='Active'></i>");
+                }
+            },
+            error: function() {
+                alert("Error");
+            }
+        });
+    });
     
     //Update Sub admin status
     $(document).on("click", ".updateSubadminStatus", function() {

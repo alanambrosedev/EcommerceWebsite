@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\AdminsRole;
 use App\Models\Category;
+use Auth;
 use Illuminate\Http\Request;
 use Image;
 use Session;
-use App\Models\AdminsRole;
-use Auth;
 
 class CategoryController extends Controller
 {
@@ -33,7 +33,7 @@ class CategoryController extends Controller
 
         }
 
-        return view('admin.categories.categories')->with(compact('categories','categoriesModule'));
+        return view('admin.categories.categories')->with(compact('categories', 'categoriesModule'));
     }
 
     public function updateCategoryStatus(Request $request)

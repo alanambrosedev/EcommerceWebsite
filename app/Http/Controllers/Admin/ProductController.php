@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -36,5 +37,18 @@ class ProductController extends Controller
         Product::where('id', $id)->delete();
 
         return redirect()->back()->with('success_message', 'Category Deleted Successfully');
+    }
+
+    public function addEditProduct(Request $request, $id = null)
+    {
+        if($id==""){
+            //Add product
+            $title = "Add Product";
+        }else{
+            //Edit product
+            $title = "Edit Product";
+        }
+        $getCategories = Category::getCategories();
+        return view('admin.products.add_edit_product')->with(compact('title','getCategories'));
     }
 }

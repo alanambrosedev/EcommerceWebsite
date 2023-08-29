@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Product;
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -41,14 +41,19 @@ class ProductController extends Controller
 
     public function addEditProduct(Request $request, $id = null)
     {
-        if($id==""){
+        if ($id == '') {
             //Add product
-            $title = "Add Product";
-        }else{
+            $title = 'Add Product';
+        } else {
             //Edit product
-            $title = "Edit Product";
+            $title = 'Edit Product';
         }
+        //Get Categories and their sub categories
         $getCategories = Category::getCategories();
-        return view('admin.products.add_edit_product')->with(compact('title','getCategories'));
+
+        //Product filters
+        $productsFilters = Product::productFilters();
+
+        return view('admin.products.add_edit_product')->with(compact('title', 'getCategories', 'productsFilters'));
     }
 }

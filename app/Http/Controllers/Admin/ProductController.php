@@ -106,6 +106,18 @@ class ProductController extends Controller
             $product->group_code = $data['group_code'];
             $product->product_price = $data['product_price'];
             $product->product_discount = $data['product_discount'];
+
+            if(!empty($data['product_discount'] && $data['product_discount']>0)){
+                $product->discount_type = 'product';
+                $product->final_price = $data['product_price'] - ($data['product_price'] * $data['product_discount'])/100;
+            }
+            else{
+                $getCategoryDiscount = Category::select('category_discount')->where('id',$category_id)->first();
+                if($getCategoryDiscount->category_discount == 0){
+                    $product->discount_type = "";
+                    $product->final_price = $data['product_price'] ;
+                }
+            }
             $product->product_weight = $data['product_weight'];
             $product->description = $data['description'];
             $product->wash_care = $data['wash_care'];
@@ -114,6 +126,7 @@ class ProductController extends Controller
             $product->sleeve = $data['sleeve'];
             $product->fit = $data['fit'];
             $product->occasion = $data['occasion'];
+            $product->search_keywords = $data['search_keywords'];
             $product->meta_title = $data['meta_title'];
             $product->meta_keywords = $data['meta_keywords'];
             $product->meta_description = $data['meta_description'];

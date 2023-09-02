@@ -54,7 +54,6 @@ class ProductController extends Controller
 
         if ($request->isMethod('post')) {
             $data = $request->all();
-
             $rules = [
                 'category_id' => 'required',
                 'product_name' => 'required|regex:/^[\pL\s\-]+$/u|max:200',
@@ -78,6 +77,27 @@ class ProductController extends Controller
                 'family_color.regex' => 'Valid Family Color is required',
             ];
             $this->validate($request, $rules, $customMessages);
+
+            //Upload Product video
+            if ($request->hasFile('product_video')) {
+                $video_tmp = $request->file('product_video');
+                if ($video_tmp->isValid()) {
+                    //upload Video
+                    // $videoName = $video_tmp->getClientOriginalName();
+                    $video_extension = $video_tmp->getClientOriginalExtension();
+                    $videoName = rand().'.'.$video_extension;
+                    $videoPath = 'front/videos/';
+                    $video_tmp->move($videoPath, $videoName);
+                    //Save video in products table
+                    $product->product_video = $videoName;
+                }
+            }
+            if (! isset($data['product_discount'])) {
+                $data['product_discount'] = 0;
+            }
+            if (! isset($data['product_weight'])) {
+                $data['product_weight'] = 0;
+            }
             $product->category_id = $data['category_id'];
             $product->product_name = $data['product_name'];
             $product->product_code = $data['product_code'];

@@ -14,13 +14,15 @@ class Product extends Model
         return $this->belongsTo('App\Models\Category', 'category_id')->with('parentcategory');
     }
 
-    public static function productFilters(){
+    public static function productFilters()
+    {
         //Product Filters
-        $productsFilters['fabricArray'] = array('Cotton','Polyster','Wool');
-        $productsFilters['sleeveArray'] = array('Full Sleeve','Half Sleeve','Short Sleeve','Sleeveless');
-        $productsFilters['patternArray'] = array('Checked','Plain','Printed','Self','Solid');
-        $productsFilters['fitArray'] = array('Regular','Slim');
-        $productsFilters['occasionArray'] = array('Casual','Formal');
+        $productsFilters['fabricArray'] = ['Cotton', 'Polyster', 'Wool'];
+        $productsFilters['sleeveArray'] = ['Full Sleeve', 'Half Sleeve', 'Short Sleeve', 'Sleeveless'];
+        $productsFilters['patternArray'] = ['Checked', 'Plain', 'Printed', 'Self', 'Solid'];
+        $productsFilters['fitArray'] = ['Regular', 'Slim'];
+        $productsFilters['occasionArray'] = ['Casual', 'Formal'];
+
         return $productsFilters;
     }
 }

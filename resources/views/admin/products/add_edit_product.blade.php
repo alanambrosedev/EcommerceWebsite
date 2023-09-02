@@ -53,7 +53,7 @@
               <form name="productForm" id="productForm" @if(empty($product['id'])) action="{{ url('admin/add-edit-product') }}" @else action="{{ url('admin/add-edit-product/'.$product['id']) }}" @endif method="post" enctype="multipart/form-data">@csrf
                 <div class="card-body">
                   <div class="form-group">
-                    <label for="category_id">Select Category</label>
+                    <label for="category_id">Select Category*</label>
                     <select name="category_id" class="form-control">
                       <option value="">Select</option>
                       @foreach ($getCategories as $cat)
@@ -72,19 +72,19 @@
                   </select>
                   </div>
                   <div class="form-group">
-                    <label for="product_name">Product Name</label>
+                    <label for="product_name">Product Name*</label>
                     <input type="text" class="form-control" id="product_name" name="product_name" placeholder="Enter Product Name">
                   </div>
                   <div class="form-group">
-                    <label for="product_code">Product Code</label>
-                    <input type="text" class="form-control" id="product_code" name="product_color" placeholder="Enter Product Code">
+                    <label for="product_code">Product Code*</label>
+                    <input type="text" class="form-control" id="product_code" name="product_code" placeholder="Enter Product Code">
                   </div>
                   <div class="form-group">
-                    <label for="product_color">Product Color</label>
+                    <label for="product_color">Product Color*</label>
                     <input type="text" class="form-control" id="product_color" name="product_color" placeholder="Enter Product Color">
                   </div>
                   <div class="form-group">
-                    <label for="family_color">Family Color</label>
+                    <label for="family_color">Family Color*</label>
                     <select name="family_color" class="form-control">
                         <option value="">Select</option>
                         <option value="Red">Red</option>
@@ -105,7 +105,7 @@
                     <input type="text" class="form-control" id="group_code" name="group_code" placeholder="Enter Group Code">
                   </div>
                   <div class="form-group">
-                    <label for="group_code">Product Price</label>
+                    <label for="group_code">Product Price*</label>
                     <input type="text" class="form-control" id="product_price" name="product_price" placeholder="Enter Product Price">
                   </div>
                   <div class="form-group">
